@@ -1,0 +1,13 @@
+<view class="container">
+  <view wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+  <view wx:else>
+    <image class="avatar" src="../images/user.png" />
+    <view class="user-info">
+       <!-- 使用默认头像 -->
+      <text class="name">{{userInfo.name}}</text>
+      <text class="email">{{userInfo.email}}</text>
+    </view>
+  </view>
+</view>

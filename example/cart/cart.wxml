@@ -1,0 +1,21 @@
+<view class="container">
+  <block wx:for="{{cartItems}}" wx:key="id">
+    <view class="cart-item">
+      <image class="item-image" src="{{item.img}}"></image>
+      <view class="item-details">
+        <text class="item-name">{{item.name}}</text>
+        <text class="item-price">￥{{item.price}}</text>
+        <view class="item-actions">
+          <view class="quantity-selector">
+            <image src="../images/reduce.png" bindtap="decreaseQuantity" data-index="{{index}}" class="quantity-btn"></image>
+            <text>{{item.quantity}}</text>
+            <image src="../images/add.png" bindtap="increaseQuantity" data-index="{{index}}" class="quantity-btn"></image>
+          </view>
+          <image src="../images/delete.png" bindtap="removeItem" data-index="{{index}}" class="delete-btn"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!-- 总价 -->
+  <view class="total-price">总价: ￥{{totalPrice}}</view>
+</view>

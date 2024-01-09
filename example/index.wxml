@@ -1,0 +1,10 @@
+<view class="container">
+
+  <!-- Image Section with Overlay Order Button -->
+  <view class="image-section">
+    <image src="./images/hotpot.png" class="cover-image" mode="aspectFill"/>
+    <view class="order-button" bindtap="navigateToOrder">
+      <text>立即点单</text>
+    </view>
+  </view>
+</view>

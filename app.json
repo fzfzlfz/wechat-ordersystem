@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "example/index",
+    "example/order/order",
+    "example/cart/cart",
+    "example/user/user"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "example/index",
+        "text": "首页",
+        "iconPath": "example/images/home.png",
+        "selectedIconPath": "example/images/home-active.png"
+      },
+      {
+        "pagePath": "example/order/order",
+        "text": "点单",
+        "iconPath": "example/images/order.png",
+        "selectedIconPath": "example/images/order-active.png"
+      },
+      {
+        "pagePath": "example/cart/cart",
+        "text": "购物车",
+        "iconPath": "example/images/cart.png",
+        "selectedIconPath": "example/images/cart-active.png"
+      },
+      {
+        "pagePath": "example/user/user",
+        "text": "我的",
+        "iconPath": "example/images/user.png",
+        "selectedIconPath": "example/images/user-active.png"
+      }
+    ],
+    "color": "#999",
+    "selectedColor": "#FF5733",
+    "backgroundColor": "#fff",
+    "borderStyle": "black"
+  },
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "火锅店",
+    "navigationBarBackgroundColor": "#EDEDED",
+    "backgroundColor": "#EDEDED"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "style": "v2",
+  "debug": true
+}

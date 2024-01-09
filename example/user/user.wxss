@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 80px;  /* 更新头像大小 */
+  height: 80px; /* 更新头像大小 */
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 2px solid #FF5733;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 可选：添加阴影效果 */
+}
+
+.user-info {
+  text-align: center;
+}
+
+.name {
+  font-size: 18px; /* 根据需要调整字体大小 */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.email {
+  font-size: 14px; /* 根据需要调整字体大小 */
+  color: #555;
+}
+
+/* 加载中样式 */
+.loading-text {
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+}

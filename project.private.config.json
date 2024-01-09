@@ -1,0 +1,6 @@
+{
+  "projectname": "dist",
+  "setting": {
+    "compileHotReLoad": true
+  }
+}

@@ -1,0 +1,31 @@
+<view class="order-container">
+  <scroll-view class="category-list" scroll-y="true">
+    <block wx:for="{{categories}}" wx:key="id">
+      <view class="category-item {{selectedCategoryId === item.id ? 'selected' : ''}}" bindtap="selectCategory" data-id="{{item.id}}">
+        {{item.name}}
+      </view>
+    </block>
+  </scroll-view>
+
+  <scroll-view class="food-list" scroll-y="true">
+    <block wx:for="{{selectedFoods}}" wx:key="id">
+      <view class="food-item">
+        <image class="food-image" src="{{item.img}}"></image>
+        <view class="food-details">
+          <text class="food-name">{{item.name}}</text>
+          <text class="food-price">￥{{item.price}}</text>
+        </view>
+        <view class="quantity-control">
+          <image src="../images/reduce.png" bindtap="removeFromCart" data-id="{{item.id}}" class="quantity-btn"></image>
+          <text>{{cart[item.id] || 0}}</text>
+          <image src="../images/add.png" bindtap="addToCart" data-id="{{item.id}}" class="quantity-btn"></image>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="floating-cart">
+    <text>总金额: ￥{{totalAmount}}</text>
+    <button bindtap="goToCart">去结算</button>
+  </view>
+</view>

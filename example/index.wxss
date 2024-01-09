@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f3f3f3; /* 统一的背景颜色 */
+}
+
+.slogan-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: transparent; /* 使口号部分背景透明 */
+}
+
+.image-section {
+  flex: 6;
+  position: relative; /* 为悬浮按钮做准备 */
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-button {
+  position: absolute; /* 让按钮悬浮在图片上 */
+  bottom: 10%; /* 在图片下方一定距离 */
+  left: 50%; /* 水平居中 */
+  transform: translateX(-50%); /* 精确居中 */
+  background-color: #ff6b6b; /* 醒目的按钮颜色 */
+  padding: 10px 20px;
+  border-radius: 20px; /* 圆角边框 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white; /* 文字颜色 */
+  font-weight: bold;
+}
