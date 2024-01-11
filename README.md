@@ -28,9 +28,7 @@ This WeChat Mini-Program is specifically designed for hot pot restaurants to str
 - [ ] Create reporting tools for sales, popular dishes, and customer feedback.
 
 ### Additional Features
-- [ ] Integrate with delivery services for home delivery options.
 - [ ] Add multilingual support for diverse customer accessibility.
-- [ ] Implement AI-based dish recommendations based on user preferences and order history.
 
 ## Contributing
 
