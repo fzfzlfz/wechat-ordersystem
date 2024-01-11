@@ -7,11 +7,11 @@
         <text class="item-price">￥{{item.price}}</text>
         <view class="item-actions">
           <view class="quantity-selector">
-            <image src="../images/reduce.png" bindtap="decreaseQuantity" data-index="{{index}}" class="quantity-btn"></image>
+            <image src="../images/reduce.png" bindtap="decreaseQuantity" data-id="{{item.id}}" class="quantity-btn"></image>
             <text>{{item.quantity}}</text>
-            <image src="../images/add.png" bindtap="increaseQuantity" data-index="{{index}}" class="quantity-btn"></image>
+            <image src="../images/add.png" bindtap="increaseQuantity" data-id="{{item.id}}" class="quantity-btn"></image>
           </view>
-          <image src="../images/delete.png" bindtap="removeItem" data-index="{{index}}" class="delete-btn"></image>
+          <image src="../images/delete.png" bindtap="removeItem" data-id="{{item.id}}" class="delete-btn"></image>
         </view>
       </view>
     </view>
