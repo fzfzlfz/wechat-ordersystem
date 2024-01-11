@@ -1,55 +1,82 @@
 Page({
   data: {
-    cartItems: [
-      // 示例购物车数据
-      { id: 1, name: '牛肉片', price: 30, quantity: 2, img: '../images/food.png' },
-      { id: 2, name: '羊肉片', price: 28, quantity: 1, img: '../images/food.png' }
-      // 更多商品...
-    ],
+    cartItems: {},
     totalPrice: 0 // 总价格
   },
-
-  onLoad: function() {
-    this.calculateTotal();
+  objectToArray: function(obj) {
+    return Object.keys(obj).map(key => obj[key]);
   },
 
+  onShow: function() {
+    const app = getApp();
+    const cartData = app.globalData.cartData;
+    this.setData({ cartItems: cartData || {} }, () => {
+      this.updateGlobalCartData();
+      this.calculateTotal();
+    });
+  },
+  
   // 计算购物车总价
   calculateTotal: function() {
     let total = 0;
-    this.data.cartItems.forEach(item => {
+    Object.values(this.data.cartItems).forEach(item => {
       total += item.price * item.quantity;
     });
     this.setData({ totalPrice: total });
   },
+  
+increaseQuantity: function(e) {
+  const itemId = e.currentTarget.dataset.id; // 使用商品ID
+  const cartItems = this.data.cartItems;
 
-  // 增加商品数量
-  increaseQuantity: function(e) {
-    const index = e.currentTarget.dataset.index;
-    const cartItems = this.data.cartItems;
-    cartItems[index].quantity += 1;
-    this.setData({ cartItems });
+  if (cartItems[itemId]) {
+    cartItems[itemId].quantity += 1;
+  }
+
+  this.setData({ cartItems }, () => {
+    this.updateGlobalCartData();
     this.calculateTotal();
-  },
+  });
+  
+},
 
-  // 减少商品数量
-  decreaseQuantity: function(e) {
-    const index = e.currentTarget.dataset.index;
-    const cartItems = this.data.cartItems;
-    if (cartItems[index].quantity > 1) {
-      cartItems[index].quantity -= 1;
-      this.setData({ cartItems });
+decreaseQuantity: function(e) {
+  console.log("decrease now");
+  const app = getApp();
+  const itemId = e.currentTarget.dataset.id; // 使用商品ID
+  const cartItems = this.data.cartItems;
+
+  if (cartItems[itemId] && cartItems[itemId].quantity > 1) {
+    cartItems[itemId].quantity -= 1;
+    this.setData({ cartItems }, () => {
+      this.updateGlobalCartData();
       this.calculateTotal();
-    }
-  },
+    });
+    
+  }
+},
 
-  // 移除商品
+
   removeItem: function(e) {
-    const index = e.currentTarget.dataset.index;
+    console.log("remove this");
+    const app = getApp();
+    const itemId = e.currentTarget.dataset.id; // 假设您有商品ID的数据绑定
     const cartItems = this.data.cartItems;
-    cartItems.splice(index, 1);
-    this.setData({ cartItems });
-    this.calculateTotal();
+  
+    delete cartItems[itemId]; // 使用 delete 来移除对象属性
+    
+    this.setData({ cartItems }, () => {
+      this.updateGlobalCartData();
+      this.calculateTotal();
+    });
+    
   },
+  
 
-  // 其他购物车相关的方法...
+  updateGlobalCartData: function() {
+    const app = getApp();
+    app.globalData.cartData = this.data.cartItems;
+  },
+  
+
 });

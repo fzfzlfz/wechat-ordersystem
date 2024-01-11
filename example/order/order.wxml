@@ -17,7 +17,7 @@
         </view>
         <view class="quantity-control">
           <image src="../images/reduce.png" bindtap="removeFromCart" data-id="{{item.id}}" class="quantity-btn"></image>
-          <text>{{cart[item.id] || 0}}</text>
+          <text>{{cart[item.id].quantity || 0}}</text>
           <image src="../images/add.png" bindtap="addToCart" data-id="{{item.id}}" class="quantity-btn"></image>
         </view>
       </view>

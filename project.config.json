@@ -21,9 +21,10 @@
     }
   },
   "condition": {},
+  "cloudfunctionRoot": "cloudfunctions/",
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "isGameTourist": false
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

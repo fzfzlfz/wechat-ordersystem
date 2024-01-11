@@ -4,6 +4,7 @@ const listeners = [];
 
 App({
   globalData: {
+    cartData: {},
     theme: 'light', // dark
     mode: '', // 模式(care：关怀模式)
   },
@@ -31,5 +32,8 @@ App({
   },
   onLaunch() {
     // TODO: 检测适老化
+    wx.cloud.init({
+      env:'cloud1-9g75rc6ca735d09e'
+    });
   },
 });
