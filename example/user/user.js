@@ -7,7 +7,10 @@ Page({
   onLoad: function() {
     // 模拟从服务器获取用户信息
     this.getUserInfo();
-    // this.callMyCloudFunction();
+  },
+
+  onShow: function() {
+    this.callMyCloudFunction();
   },
 
   getUserInfo: function() {
@@ -36,19 +39,19 @@ Page({
     });
   },
 
-  // callMyCloudFunction: function() {
-  //   wx.cloud.callFunction({
-  //     name: 'placeOrder', // 替换为您的云函数名称
-  //     data: {
-  //       "one":1
-  //       // 这里可以传递参数到云函数
-  //     },
-  //     success: function(res) {
-  //       console.log(res.result) // 输出云函数返回的结果
-  //     },
-  //     fail: console.error
-  //   })
-  // }
+  callMyCloudFunction: function() {
+    wx.cloud.callFunction({
+      name: 'placeOrder', // 替换为您的云函数名称
+      data: {
+        a: 1,
+        b: 2,
+      },
+      success: function(res) {
+        console.log(res.result.data) // 3
+      },
+      fail: console.error
+    })
+  }
 
   // 其他用户相关的方法可以在这里添加
 });
