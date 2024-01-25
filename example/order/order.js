@@ -1,10 +1,6 @@
 Page({
   data: {
-    categories: [
-      { id: 'meat', name: '肉类' },
-      { id: 'veggie', name: '蔬菜' },
-      // 更多类别...
-    ],
+    categories: ["meat", "veggie"],
     allFoods: {
       //每个食物要有unique id，即使是不同类别
       "meat": [
@@ -33,7 +29,7 @@ Page({
 
   // 当页面加载
   onLoad: function() {
-    this.getFoodFromDB();
+    this.getFoodAndMenuFromDB();
   },
 
   onShow: function() {
@@ -42,8 +38,8 @@ Page({
     // 更新 allFoods 中每个食物的 quantity
     for (let category in this.data.allFoods) {
       this.data.allFoods[category].forEach(food => {
-        if (globalCart[food.id]) {
-          food.quantity = globalCart[food.id].quantity;
+        if (globalCart[food._id]) {
+          food.quantity = globalCart[food._id].quantity;
         } else {
           food.quantity = 0; // 如果全局购物车中没有此食物，设置数量为0
         }
@@ -58,14 +54,14 @@ Page({
     this.calculateTotal();
   },
 
-  getFoodFromDB: async function() {
+  getFoodAndMenuFromDB: async function() {
     try {
       const res = await wx.cloud.callFunction({
         name: 'placeOrder', // 替换为您的云函数名称
       });
   
       const foodList = res.result.data; // Get food data from the cloud function
-      this.loadFood(foodList); // Load and organize food data
+      this.loadFoodAndMenu(foodList); // Load and organize food data
       this.selectCategory({ currentTarget: { dataset: { id: 'meat' } } });
     } catch (error) {
       console.error(error);
@@ -73,26 +69,32 @@ Page({
   },
 
   // 加载食物数据到 allFoods
-  loadFood: function(foodList) {
-    const foodItems = {...this.data.allFoods};
+  loadFoodAndMenu: function(foodList) {
+    var foodItems = {...this.data.allFoods};
+    var menuItems = {...this.data.categories};
 
     for (const item of foodList) {
-      if (item.category && this.data.allFoods[item.category]) {
-        this.data.allFoods[item.category].push(item);
+      if (item.food && item.category && this.data.allFoods[item.category]) {
+        foodItems[item.category].push(item);
+      } else if(item.menu) {
+        // menuItems = item.categories;
       }
     }
 
-    this.setData({ allFoods: foodItems });
+    this.setData({ allFoods: foodItems, categories: menuItems });
   },
 
-  // 选择类别
+ // 选择类别
   selectCategory: function(e) {
-    const categoryId = e.currentTarget.dataset.id;
+    
+    const categoryName = e.currentTarget.dataset.category;
+    console.log("select category: " + categoryName);
     this.setData({
-      selectedFoods: this.data.allFoods[categoryId] || [],
-      selectedCategoryId: categoryId // 确保更新这里
+      selectedFoods: this.data.allFoods[categoryName] || [],
+      selectedCategory: categoryName // 更新为 selectedCategory
     });
   },
+
   
 
   // 添加到购物车
@@ -153,7 +155,7 @@ Page({
   // 根据 ID 查找食物
   findFoodById: function(id) {
     for (let category in this.data.allFoods) {
-      const food = this.data.allFoods[category].find(item => item.id === id);
+      const food = this.data.allFoods[category].find(item => item._id === id);
       if (food) return food;
     }
     return null;

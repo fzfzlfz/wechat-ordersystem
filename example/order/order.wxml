@@ -1,14 +1,15 @@
 <view class="order-container">
   <scroll-view class="category-list" scroll-y="true">
-    <block wx:for="{{categories}}" wx:key="id">
-      <view class="category-item {{selectedCategoryId === item.id ? 'selected' : ''}}" bindtap="selectCategory" data-id="{{item.id}}">
-        {{item.name}}
+    <block wx:for="{{categories}}" wx:for-item="category" wx:key="*this">
+      <view class="category-item {{selectedCategory === category ? 'selected' : ''}}" bindtap="selectCategory" data-category="{{category}}">
+        {{category}}
       </view>
     </block>
   </scroll-view>
 
+
   <scroll-view class="food-list" scroll-y="true">
-    <block wx:for="{{selectedFoods}}" wx:key="id">
+    <block wx:for="{{selectedFoods}}" wx:key="unique">
       <view class="food-item">
         <image class="food-image" src="{{item.img}}"></image>
         <view class="food-details">
@@ -16,9 +17,9 @@
           <text class="food-price">￥{{item.price}}</text>
         </view>
         <view class="quantity-control">
-          <image src="../images/reduce.png" bindtap="removeFromCart" data-id="{{item.id}}" class="quantity-btn"></image>
-          <text>{{cart[item.id].quantity || 0}}</text>
-          <image src="../images/add.png" bindtap="addToCart" data-id="{{item.id}}" class="quantity-btn"></image>
+          <image src="../images/reduce.png" bindtap="removeFromCart" data-id="{{item._id}}" class="quantity-btn"></image>
+          <text>{{cart[item._id].quantity || 0}}</text>
+          <image src="../images/add.png" bindtap="addToCart" data-id="{{item._id}}" class="quantity-btn"></image>
         </view>
       </view>
     </block>

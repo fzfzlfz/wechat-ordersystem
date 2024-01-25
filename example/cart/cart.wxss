@@ -71,3 +71,21 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.button-container {
+  display: flex;
+  justify-content: space-between; /* 更改为space-between以提供更大的间距 */
+  margin-top: 20px;
+  padding: 0 20px; /* 在容器两侧添加一些内边距 */
+}
+
+.action-button {
+  background-color: #FF5733;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  flex-grow: 1; /* 确保按钮在容器内均匀展开 */
+  margin: 0 10px; /* 在每个按钮之间添加间距 */
+}
+

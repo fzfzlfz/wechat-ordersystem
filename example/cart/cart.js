@@ -77,6 +77,16 @@ decreaseQuantity: function(e) {
     const app = getApp();
     app.globalData.cartData = this.data.cartItems;
   },
-  
+
+  goToOrder: function() {
+    const app = getApp();
+    wx.switchTab({
+      url: '../order/order'
+    });
+  },
+
+  checkout: function() {
+    console.log("下单！");
+  }
 
 });

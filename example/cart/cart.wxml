@@ -7,15 +7,21 @@
         <text class="item-price">￥{{item.price}}</text>
         <view class="item-actions">
           <view class="quantity-selector">
-            <image src="../images/reduce.png" bindtap="decreaseQuantity" data-id="{{item.id}}" class="quantity-btn"></image>
+            <image src="../images/reduce.png" bindtap="decreaseQuantity" data-id="{{item._id}}" class="quantity-btn"></image>
             <text>{{item.quantity}}</text>
-            <image src="../images/add.png" bindtap="increaseQuantity" data-id="{{item.id}}" class="quantity-btn"></image>
+            <image src="../images/add.png" bindtap="increaseQuantity" data-id="{{item._id}}" class="quantity-btn"></image>
           </view>
-          <image src="../images/delete.png" bindtap="removeItem" data-id="{{item.id}}" class="delete-btn"></image>
+          <image src="../images/delete.png" bindtap="removeItem" data-id="{{item._id}}" class="delete-btn"></image>
         </view>
       </view>
     </view>
   </block>
   <!-- 总价 -->
   <view class="total-price">总价: ￥{{totalPrice}}</view>
+  
+  <view class="button-container">
+    <button bindtap="goToOrder" class="action-button">返回菜单</button>
+    <button bindtap="checkout" class="action-button">付款</button>
+  </view>
+
 </view>
