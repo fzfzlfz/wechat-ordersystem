@@ -1,8 +1,8 @@
 Page({
   data: {
-    categories: ["meat", "veggie"],
+    categories:[],
     allFoods: {
-      //每个食物要有unique id，即使是不同类别
+      
       "meat": [
         // { id: 1, name: "牛肉片", price: 30,quantity: 0, img: "../images/food.png" },
         // { id: 2, name: "猪肉片", price: 28,quantity: 0, img: "../images/food.png" },
@@ -59,29 +59,38 @@ Page({
       const res = await wx.cloud.callFunction({
         name: 'placeOrder', // 替换为您的云函数名称
       });
-  
-      const foodList = res.result.data; // Get food data from the cloud function
-      this.loadFoodAndMenu(foodList); // Load and organize food data
-      this.selectCategory({ currentTarget: { dataset: { id: 'meat' } } });
+      console.log("cloudfunc result");
+      console.log(res.result);
+      const { foodList, categoryList } = res.result;
+      this.loadFoodAndMenu(categoryList, foodList); // Load and organize food data
+
+      if (this.data.categories.length > 0) {
+        const firstCategory = this.data.categories[0];
+        this.setData({
+          selectedCategory: firstCategory,
+          selectedFoods: this.data.allFoods[firstCategory] || []
+        });
+      }
     } catch (error) {
       console.error(error);
     }
   },
 
   // 加载食物数据到 allFoods
-  loadFoodAndMenu: function(foodList) {
+  loadFoodAndMenu: async function(categoryList, foodList) {
     var foodItems = {...this.data.allFoods};
-    var menuItems = {...this.data.categories};
 
+    // set up allFoods categories
+    for (let category of categoryList) {
+      foodItems[category] = [];
+    }
     for (const item of foodList) {
-      if (item.food && item.category && this.data.allFoods[item.category]) {
+      if (item.isFood && item.category) {
         foodItems[item.category].push(item);
-      } else if(item.menu) {
-        // menuItems = item.categories;
-      }
+      } 
     }
 
-    this.setData({ allFoods: foodItems, categories: menuItems });
+    this.setData({ allFoods: foodItems, categories: categoryList });
   },
 
  // 选择类别
